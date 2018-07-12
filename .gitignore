@@ -1,5 +1,6 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
+*.DS_Store
 *.py[cod]
 *$py.class
 
@@ -23,6 +24,7 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+*.h5
 MANIFEST
 
 # PyInstaller
