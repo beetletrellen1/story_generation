@@ -10,9 +10,9 @@ from keras.layers.wrappers import TimeDistributed
 import argparse
 from RNN_utils import *
 
-# Parsing arguments for Network definition
+# Parsing arguments for network definitions
 ap = argparse.ArgumentParser()
-ap.add_argument('-data_dir', default='./data/test.txt')
+ap.add_argument('-data_dir', default='')
 ap.add_argument('-batch_size', type=int, default=50)
 ap.add_argument('-layer_num', type=int, default=2)
 ap.add_argument('-seq_length', type=int, default=50)
@@ -23,6 +23,7 @@ ap.add_argument('-mode', default='train')
 ap.add_argument('-weights', default='')
 args = vars(ap.parse_args())
 
+# Using parsed arguments as variables
 DATA_DIR = args['data_dir']
 BATCH_SIZE = args['batch_size']
 HIDDEN_DIM = args['hidden_dim']
@@ -35,7 +36,7 @@ LAYER_NUM = args['layer_num']
 # Creating training data
 X, y, VOCAB_SIZE, ix_to_char = load_data(DATA_DIR, SEQ_LENGTH)
 
-# Creating and compiling the Network
+# Creating and compiling the network
 model = Sequential()
 model.add(LSTM(HIDDEN_DIM, input_shape=(None, VOCAB_SIZE), return_sequences=True))
 for i in range(LAYER_NUM - 1):
@@ -44,10 +45,10 @@ model.add(TimeDistributed(Dense(VOCAB_SIZE)))
 model.add(Activation('softmax'))
 model.compile(loss="categorical_crossentropy", optimizer="rmsprop")
 
-# Generate some sample before training to know how bad it is!
+# Generate sample for comparison
 generate_text(model, args['generate_length'], VOCAB_SIZE, ix_to_char)
 
-if not WEIGHTS == '':
+if WEIGHTS != '':
   model.load_weights(WEIGHTS)
   nb_epoch = int(WEIGHTS[WEIGHTS.rfind('_') + 1:WEIGHTS.find('.')])
 else:

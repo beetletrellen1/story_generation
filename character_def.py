@@ -1,21 +1,21 @@
 from __future__ import print_function
 import numpy as np
 
-# method for generating text
+# Function for generating text
 def generate_text(model, length, vocab_size, ix_to_char):
-	# starting with random character
+	# Begin with random characters
 	ix = [np.random.randint(vocab_size)]
 	y_char = [ix_to_char[ix[-1]]]
 	X = np.zeros((1, length, vocab_size))
 	for i in range(length):
-		# appending the last predicted character to sequence
+		# Appending the last predicted character to sequence
 		X[0, i, :][ix[-1]] = 1
 		print(ix_to_char[ix[-1]], end="")
 		ix = np.argmax(model.predict(X[:, :i+1, :])[0], 1)
 		y_char.append(ix_to_char[ix[-1]])
 	return ('').join(y_char)
 
-# method for preparing the training data
+# Function for preparing the training data
 def load_data(data_dir, seq_length):
 	data = open(data_dir, 'r').read()
 	chars = list(set(data))
@@ -24,6 +24,7 @@ def load_data(data_dir, seq_length):
 	print('Data length: {} characters'.format(len(data)))
 	print('Vocabulary size: {} characters'.format(VOCAB_SIZE))
 
+	# This is character to character production
 	ix_to_char = {ix:char for ix, char in enumerate(chars)}
 	char_to_ix = {char:ix for ix, char in enumerate(chars)}
 
