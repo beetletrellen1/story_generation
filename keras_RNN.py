@@ -8,7 +8,7 @@ from keras.layers.core import Dense, Activation, Dropout
 from keras.layers.recurrent import LSTM, SimpleRNN
 from keras.layers.wrappers import TimeDistributed
 import argparse
-from RNN_utils import *
+from character_def import *
 
 # Parsing arguments for network definitions
 ap = argparse.ArgumentParser()
