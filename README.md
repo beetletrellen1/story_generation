@@ -39,7 +39,9 @@ code, the network will learn read over the text in 50 character chunks to help
 predict the next one.  
 
 Example, having a sequence length of 10 the network could produce this:
-```Good Morni > n
+```
+Good Morni > n
+
 ood Mornin > g
 ```
 
