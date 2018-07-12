@@ -24,7 +24,7 @@ def load_data(data_dir, seq_length):
 	print('Data length: {} characters'.format(len(data)))
 	print('Vocabulary size: {} characters'.format(VOCAB_SIZE))
 
-	# This is character to character production
+	# This is to convert characters to numbers then back to characters
 	ix_to_char = {ix:char for ix, char in enumerate(chars)}
 	char_to_ix = {char:ix for ix, char in enumerate(chars)}
 
